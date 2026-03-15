@@ -1,0 +1,37 @@
+[package]
+name = "iris-arc"
+version = "0.1.0"
+edition = "2021"
+description = "IrisARC desktop chat app built with Tauri v2"
+authors = ["IrisARC Team"]
+license = "MIT"
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls"] }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "time", "sync"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+dotenvy = "0.15"
+futures-util = { version = "0.3", default-features = false, features = ["std"] }
+base64 = "0.22"
+mime_guess = "2"
+uuid = { version = "1", features = ["v4"] }
+axum = "0.7.5"
+tower-http = { version = "0.5.2", features = ["cors"] }
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[lib]
+name = "iris_arc_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+panic = "abort"

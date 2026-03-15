@@ -1,0 +1,19 @@
+# Environment
+.env
+.env.local
+.env.production
+.env.*.local
+
+# Node
+node_modules/
+dist/
+
+# Rust
+target/
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

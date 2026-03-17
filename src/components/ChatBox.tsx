@@ -115,53 +115,52 @@ export const ChatBox: React.FC<ChatBoxProps> = ({
 	};
 
 	return (
-		<div className="chatbox">
-			<FilePreview attachments={attachments} onRemove={removeAttachment} />
-			<div className="chatbox-input">
-				<TextareaAutosize
-					ref={textareaRef}
-					className="chatbox-textarea"
-					placeholder="How can I help you today?"
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-					onKeyDown={handleKeyDown}
-					minRows={1}
-					maxRows={6}
-				/>
-			</div>
-			<div className="chatbox-bar">
+		<div className="chatbox p-2 transition-all duration-200" style={{ borderRadius: '28px' }}>
+			{attachments.length > 0 && (
+                <div className="pb-2">
+                    <FilePreview attachments={attachments} onRemove={removeAttachment} />
+                </div>
+            )}
+			
+			<div className="flex items-end gap-2 px-1">
 				<button
 					type="button"
-					className="chatbox-icon"
+					className="w-[38px] h-[38px] flex-shrink-0 rounded-full bg-gray-50 hover:bg-gray-100 border border-gray-100 flex items-center justify-center text-gray-600 transition-colors mb-1"
 					onClick={() => fileInputRef.current?.click()}
 					title="Attach files"
 					disabled={isStreaming || attachments.length >= MAX_FILES}
 				>
-					<svg
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path d="M12 5v14M5 12h14" />
-					</svg>
+					<span className="text-2xl font-light leading-none" style={{ marginTop: '-2px' }}>+</span>
 				</button>
-				<ModelSelector currentModel={currentModel} onSelect={onModelChange} />
-				<div className="flex-1" />
+				
+				<div className="flex-1 py-1">
+					<TextareaAutosize
+						ref={textareaRef}
+						className="chatbox-textarea w-full bg-transparent outline-none resize-none m-0 p-0 text-[15px] pt-1"
+						placeholder="Message AI..."
+						value={text}
+						onChange={(e) => setText(e.target.value)}
+						onKeyDown={handleKeyDown}
+						minRows={1}
+						maxRows={6}
+					/>
+				</div>
+
 				<button
 					type="button"
-					className="send-button"
+					className="w-[38px] h-[38px] flex-shrink-0 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mb-1"
 					onClick={handleSend}
 					disabled={!hasContent || isStreaming}
 					title="Send message"
 				>
-					<ArrowUp size={16} />
+					<ArrowUp size={18} />
 				</button>
 			</div>
+            
+            <div className="flex items-center px-1 pt-1 mt-1 border-t border-transparent">
+                <ModelSelector currentModel={currentModel} onSelect={onModelChange} />
+            </div>
+
 			<input
 				type="file"
 				ref={fileInputRef}

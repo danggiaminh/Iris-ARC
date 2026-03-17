@@ -50,18 +50,31 @@ textarea {
 }
 
 .app-root.sidebar-collapsed .sidebar {
-	width: 0;
-	padding: 0;
-	border-right-color: transparent;
+	width: 60px;
+	padding: 12px 6px;
 }
 
-.app-root.sidebar-collapsed .sidebar > * {
+.app-root.sidebar-collapsed .sidebar-logo span,
+.app-root.sidebar-collapsed .history-item-title,
+.app-root.sidebar-collapsed .account-info,
+.app-root.sidebar-collapsed .action-text {
 	opacity: 0;
 	pointer-events: none;
+    display: none;
+}
+
+.app-root.sidebar-collapsed .sidebar-action {
+    color: transparent;
+    justify-content: center;
+}
+
+.app-root.sidebar-collapsed .sidebar-action svg {
+    color: #374151;
+    margin: 0;
 }
 
 .sidebar {
-	width: 220px;
+	width: 260px;
 	background: #ffffff;
 	border-right: 1px solid #e5e7eb;
 	padding: 12px 10px;
